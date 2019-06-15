@@ -108,9 +108,9 @@ it('tests reducer - change rates and exchange', () => {
 
   newState = currencyExchange(newState, {
     type: RECEIVE_CURRENCY_RATES,
-    rate: 0.5,
+    rate: 0.5111,
   });
-  expect(newState.currencyRate).toBe(0.5);
+  expect(newState.currencyRate).toBe(0.51);
   expect(newState.outputAmount).toBe(50);
 
   newState = currencyExchange(newState, { type: EXCHANGE });
