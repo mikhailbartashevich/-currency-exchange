@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExchangeFab should render correctly in "debug" mode 1`] = `
+<div
+  className="Rate"
+>
+  <span>
+    1 
+     = 
+     
+  </span>
+</div>
+`;
+
+exports[`ExchangeFab should render correctly with no props 1`] = `
+<div
+  className="Rate"
+>
+  <span>
+    1 
+     = 
+     
+  </span>
+</div>
+`;
+
+exports[`ExchangeFab should render correctly with props 1`] = `
+<div
+  className="Rate"
+>
+  <span>
+    1 
+    $
+     = 
+    0.23
+     
+    €
+  </span>
+</div>
+`;
