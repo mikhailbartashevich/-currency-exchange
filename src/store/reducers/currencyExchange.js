@@ -7,6 +7,7 @@ import {
   RECEIVE_CURRENCY_RATES,
   ERROR_CURRENCY_RATES,
   EXCHANGE,
+  UPDATE_ALL_CURRENCIES,
 } from '../actions/currencyExchangeActions';
 
 export const initialState = {
@@ -97,6 +98,12 @@ export const currencyExchange = (state = initialState, action) => {
         ...state,
         outputCurrency: action.currency,
         availableOutputAmount: findMoney(state.pocket, action.currency),
+      };
+    case UPDATE_ALL_CURRENCIES:
+      return {
+        ...state,
+        outputCurrency: action.outputCurrency,
+        inputCurrency: action.inputCurrency,
       };
     case LOAD_CURRENCY_RATES:
       return {
