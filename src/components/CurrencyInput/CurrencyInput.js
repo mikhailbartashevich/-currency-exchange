@@ -3,12 +3,6 @@ import './CurrencyInput.css';
 import { Select, MenuItem, TextField } from '@material-ui/core';
 
 export class CurrencyInput extends React.Component {
-  constructor(props) {
-    super(props);
-    const { amount, currency, currencyOptions, actions } = props;
-    this.state = { amount, currency, currencyOptions, actions };
-  }
-
   handleAmountChange = amount => {
     this.props.actions.changeAmount(this.truncate(amount));
   };
