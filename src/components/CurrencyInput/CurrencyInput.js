@@ -10,8 +10,7 @@ export class CurrencyInput extends React.Component {
   }
 
   handleAmountChange = amount => {
-    const updated = amount ? Number(amount) : 0;
-    this.props.actions.changeAmount(Number(this.truncate(updated)));
+    this.props.actions.changeAmount(this.truncate(amount));
   };
 
   handleCurrencyChange = currency => {
@@ -22,7 +21,7 @@ export class CurrencyInput extends React.Component {
 
   truncate(value) {
     const match = value.toString().match(/^\d+(?:\.\d{0,2})?/);
-    return match ? match[0] : 0;
+    return match ? match[0] : '';
   }
 
   render() {

@@ -9,10 +9,16 @@ import rootReducer from './store/reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
 
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunkMiddleware)),
-);
+console.log(process.env.NODE_ENV);
+
+let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  store = createStore(
+    rootReducer,
+    composeWithDevTools(applyMiddleware(thunkMiddleware)),
+  );
+}
 
 render(
   <Provider store={store}>

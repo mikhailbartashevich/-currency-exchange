@@ -79,7 +79,7 @@ export class Exchanger extends React.Component {
               onClick={this.props.exchange}
               disabled={
                 this.props.availableInputAmount < this.props.inputAmount ||
-                !this.props.inputAmount
+                !Number(this.props.inputAmount)
               }
             >
               Exchange

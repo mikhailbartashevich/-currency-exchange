@@ -10,9 +10,9 @@ import {
 } from '../actions/currencyExchangeActions';
 
 export const initialState = {
-  inputAmount: 0.0,
+  inputAmount: '',
   inputCurrency: { currency: 'EUR', symbol: '€' },
-  outputAmount: 0.0,
+  outputAmount: '',
   outputCurrency: { currency: 'USD', symbol: '$' },
   currencyOptions: [
     { currency: 'USD', symbol: '$' },
@@ -40,7 +40,7 @@ const findMoney = (pocket, currency) => {
 const updatePocket = state => {
   if (
     state.inputCurrency.currency === state.outputCurrency.currency ||
-    state.availableInputAmount < state.inputAmount ||
+    state.availableInputAmount < Number(state.inputAmount) ||
     !state.inputAmount
   ) {
     return state.pocket;
@@ -49,13 +49,13 @@ const updatePocket = state => {
     if (money.currency === state.inputCurrency.currency) {
       return {
         ...money,
-        amount: roundValue((money.amount -= state.inputAmount)),
+        amount: roundValue((money.amount -= Number(state.inputAmount))),
       };
     }
     if (money.currency === state.outputCurrency.currency) {
       return {
         ...money,
-        amount: roundValue((money.amount += state.outputAmount)),
+        amount: roundValue((money.amount += Number(state.outputAmount))),
       };
     }
     return money;
@@ -108,6 +108,7 @@ export const currencyExchange = (state = initialState, action) => {
         ...state,
         loadingRates: false,
         currencyRate: roundValue(action.rate),
+        outputAmount: roundValue(state.inputAmount * action.rate),
       };
     case ERROR_CURRENCY_RATES:
       return {
