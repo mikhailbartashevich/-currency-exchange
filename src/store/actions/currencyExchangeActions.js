@@ -46,7 +46,7 @@ export const updateOutputCurrency = outputCurrency => {
   return (dispatch, getState) => {
     const inputCurrency = getState().currencyExchange.inputCurrency;
     if (inputCurrency.currency === outputCurrency.currency) {
-      dispatch(swapCurrencies(outputCurrency, getState().currencyExchange.outputCurrency));
+      dispatch(swapCurrencies(getState().currencyExchange.outputCurrency, outputCurrency));
     } else {
       dispatch(changeOutputCurrency(outputCurrency));
       dispatch(fetchRates(inputCurrency, outputCurrency));
