@@ -6,9 +6,7 @@ exports[`Balance should render balance with given props 1`] = `
 >
   <span>
     10
-     
-  </span>
-  <span>
+     
     $
   </span>
 </span>
@@ -19,9 +17,8 @@ exports[`Balance should render correctly in "debug" mode 1`] = `
   className="Balance"
 >
   <span>
-     
+     
   </span>
-  <span />
 </span>
 `;
 
@@ -30,8 +27,7 @@ exports[`Balance should render correctly with no props 1`] = `
   className="Balance"
 >
   <span>
-     
+     
   </span>
-  <span />
 </span>
 `;
