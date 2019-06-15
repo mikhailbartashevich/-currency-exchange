@@ -25,7 +25,8 @@ export class CurrencyInput extends React.Component {
   }
 
   render() {
-    const options = this.props.currencyOptions.map(option => (
+    const currencies = this.props.currencyOptions || [];
+    const options = currencies.map(option => (
       <MenuItem key={option.currency} value={option.currency}>
         {option.currency}
       </MenuItem>
@@ -33,7 +34,7 @@ export class CurrencyInput extends React.Component {
     return (
       <div className="CurrencyInput">
         <Select
-          value={this.props.currency.currency}
+          value={this.props.currency ? this.props.currency.currency : ''}
           onChange={e => this.handleCurrencyChange(e.target.value)}
         >
           {options}

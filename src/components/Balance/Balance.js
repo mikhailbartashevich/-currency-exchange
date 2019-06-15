@@ -5,7 +5,7 @@ export function Balance(props) {
   return (
     <span className="Balance">
       <span>{props.amount}&nbsp;</span>
-      <span>{props.currency.symbol}</span>
+      <span>{props.currency ? props.currency.symbol : ''}</span>
     </span>
   );
 }

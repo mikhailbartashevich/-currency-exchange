@@ -1,0 +1,281 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Exchanger should render correctly in "debug" mode 1`] = `
+<div
+  className="Exchanger"
+>
+  <div
+    className="Exchanger_top-section"
+  >
+    <CurrencyInput
+      actions={
+        Object {
+          "changeAmount": undefined,
+          "changeCurrency": undefined,
+        }
+      }
+      className="Exchanger_input"
+    />
+    <div
+      className="Exchanger_field"
+    >
+      <span
+        className="Exchanger_label"
+      >
+        You have
+      </span>
+      <Balance />
+    </div>
+  </div>
+  <div
+    className="Exchanger_bottom-section"
+  >
+    <div
+      className="Exchanger_rate"
+    >
+      <Rate />
+    </div>
+    <CurrencyInput
+      actions={
+        Object {
+          "changeAmount": undefined,
+          "changeCurrency": undefined,
+        }
+      }
+    />
+    <div
+      className="Exchanger_field"
+    >
+      <span
+        className="Exchanger_label"
+      >
+        You have
+      </span>
+      <Balance />
+    </div>
+    <div
+      className="Exchanger_submit"
+    >
+      <WithStyles(ExchangeFabRaw)
+        aria-label="Exchange"
+        disabled={true}
+        variant="extended"
+      >
+        Exchange
+      </WithStyles(ExchangeFabRaw)>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Exchanger should render correctly with no props 1`] = `
+<div
+  className="Exchanger"
+>
+  <div
+    className="Exchanger_top-section"
+  >
+    <CurrencyInput
+      actions={
+        Object {
+          "changeAmount": undefined,
+          "changeCurrency": undefined,
+        }
+      }
+      className="Exchanger_input"
+    />
+    <div
+      className="Exchanger_field"
+    >
+      <span
+        className="Exchanger_label"
+      >
+        You have
+      </span>
+      <Balance />
+    </div>
+  </div>
+  <div
+    className="Exchanger_bottom-section"
+  >
+    <div
+      className="Exchanger_rate"
+    >
+      <Rate />
+    </div>
+    <CurrencyInput
+      actions={
+        Object {
+          "changeAmount": undefined,
+          "changeCurrency": undefined,
+        }
+      }
+    />
+    <div
+      className="Exchanger_field"
+    >
+      <span
+        className="Exchanger_label"
+      >
+        You have
+      </span>
+      <Balance />
+    </div>
+    <div
+      className="Exchanger_submit"
+    >
+      <WithStyles(ExchangeFabRaw)
+        aria-label="Exchange"
+        disabled={true}
+        variant="extended"
+      >
+        Exchange
+      </WithStyles(ExchangeFabRaw)>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Exchanger should render form with given props 1`] = `
+<div
+  className="Exchanger"
+>
+  <div
+    className="Exchanger_top-section"
+  >
+    <CurrencyInput
+      actions={
+        Object {
+          "changeAmount": undefined,
+          "changeCurrency": undefined,
+        }
+      }
+      amount="10"
+      className="Exchanger_input"
+      currency={
+        Object {
+          "currency": "USD",
+          "symbol": "$",
+        }
+      }
+      currencyOptions={
+        Array [
+          Object {
+            "currency": "USD",
+            "symbol": "$",
+          },
+          Object {
+            "currency": "EUR",
+            "symbol": "€",
+          },
+          Object {
+            "currency": "GBP",
+            "symbol": "£",
+          },
+        ]
+      }
+    />
+    <div
+      className="Exchanger_field"
+    >
+      <span
+        className="Exchanger_label"
+      >
+        You have
+      </span>
+      <Balance
+        amount="20"
+        currency={
+          Object {
+            "currency": "USD",
+            "symbol": "$",
+          }
+        }
+      />
+    </div>
+  </div>
+  <div
+    className="Exchanger_bottom-section"
+  >
+    <div
+      className="Exchanger_rate"
+    >
+      <Rate
+        inputCurrency={
+          Object {
+            "currency": "USD",
+            "symbol": "$",
+          }
+        }
+        outputCurrency={
+          Object {
+            "currency": "EUR",
+            "symbol": "€",
+          }
+        }
+        rate="0.6"
+      />
+    </div>
+    <CurrencyInput
+      actions={
+        Object {
+          "changeAmount": undefined,
+          "changeCurrency": undefined,
+        }
+      }
+      amount="10"
+      currency={
+        Object {
+          "currency": "EUR",
+          "symbol": "€",
+        }
+      }
+      currencyOptions={
+        Array [
+          Object {
+            "currency": "USD",
+            "symbol": "$",
+          },
+          Object {
+            "currency": "EUR",
+            "symbol": "€",
+          },
+          Object {
+            "currency": "GBP",
+            "symbol": "£",
+          },
+        ]
+      }
+    />
+    <div
+      className="Exchanger_field"
+    >
+      <span
+        className="Exchanger_label"
+      >
+        You have
+      </span>
+      <Balance
+        amount="30"
+        currency={
+          Object {
+            "currency": "EUR",
+            "symbol": "€",
+          }
+        }
+      />
+    </div>
+    <div
+      className="Exchanger_submit"
+    >
+      <WithStyles(ExchangeFabRaw)
+        aria-label="Exchange"
+        disabled={false}
+        variant="extended"
+      >
+        Exchange
+      </WithStyles(ExchangeFabRaw)>
+    </div>
+  </div>
+</div>
+`;

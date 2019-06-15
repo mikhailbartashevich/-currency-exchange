@@ -7,7 +7,11 @@ import { ExchangeFab } from '../ExchangeFab/ExchangeFab';
 
 export class Exchanger extends React.Component {
   componentDidMount() {
-    this.props.fetchRates(this.props.inputCurrency, this.props.outputCurrency);
+    this.props.fetchRates &&
+      this.props.fetchRates(
+        this.props.inputCurrency,
+        this.props.outputCurrency,
+      );
     clearInterval(this.fetchInterval);
     this.fetchInterval = setInterval(
       () =>

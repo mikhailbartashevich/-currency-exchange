@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExchangeFab should render correctly in "debug" mode 1`] = `
+<ExchangeFabRaw
+  classes={
+    Object {
+      "root": "ExchangeFabRaw-root-1",
+    }
+  }
+  debug={true}
+/>
+`;
+
+exports[`ExchangeFab should render correctly with no props 1`] = `
+<ExchangeFabRaw
+  classes={
+    Object {
+      "root": "ExchangeFabRaw-root-1",
+    }
+  }
+/>
+`;

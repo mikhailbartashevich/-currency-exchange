@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Balance should render balance with given props 1`] = `
+<div
+  className="CurrencyInput"
+>
+  <WithStyles(WithFormControlContext(ForwardRef(Select)))
+    onChange={[Function]}
+    value="USD"
+  >
+    <WithStyles(ForwardRef(MenuItem))
+      key="USD"
+      value="USD"
+    >
+      USD
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem))
+      key="EUR"
+      value="EUR"
+    >
+      EUR
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem))
+      key="GBP"
+      value="GBP"
+    >
+      GBP
+    </WithStyles(ForwardRef(MenuItem))>
+  </WithStyles(WithFormControlContext(ForwardRef(Select)))>
+  <WithStyles(ForwardRef(TextField))
+    margin="normal"
+    onChange={[Function]}
+    type="number"
+    value="30"
+  />
+</div>
+`;
+
+exports[`Balance should render correctly in "debug" mode 1`] = `
+<div
+  className="CurrencyInput"
+>
+  <WithStyles(WithFormControlContext(ForwardRef(Select)))
+    onChange={[Function]}
+    value=""
+  />
+  <WithStyles(ForwardRef(TextField))
+    margin="normal"
+    onChange={[Function]}
+    type="number"
+  />
+</div>
+`;
+
+exports[`Balance should render correctly with no props 1`] = `
+<div
+  className="CurrencyInput"
+>
+  <WithStyles(WithFormControlContext(ForwardRef(Select)))
+    onChange={[Function]}
+    value=""
+  />
+  <WithStyles(ForwardRef(TextField))
+    margin="normal"
+    onChange={[Function]}
+    type="number"
+  />
+</div>
+`;
