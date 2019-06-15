@@ -1,0 +1,42 @@
+.Exchanger {
+  font-family: 'Roboto';
+  background: white;
+  min-width: 250px;
+  color: #7d7676;
+  font-size: 12px;
+}
+
+.Exchanger_field {
+  margin-bottom: 20px;
+}
+
+.Exchanger_label {
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.Exchanger_rate {
+  display: flex;
+  justify-content: center;
+}
+
+.Exchanger_rate .Rate {
+  margin-top: -30px;
+}
+
+.Exchanger_bottom-section,
+.Exchanger_top-section {
+  padding: 20px;
+}
+
+.Exchanger_bottom-section {
+  background: #f5f5f5;
+  min-height: 150px;
+  position: relative;
+}
+
+.Exchanger_submit {
+  position: absolute;
+  bottom: 20px;
+  width: 250px;
+}
