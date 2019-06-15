@@ -1,5 +1,6 @@
 import React from 'react';
 import './CurrencyInput.css';
+import { Select, MenuItem, TextField } from '@material-ui/core';
 
 export class CurrencyInput extends React.Component {
   constructor(props) {
@@ -26,25 +27,24 @@ export class CurrencyInput extends React.Component {
 
   render() {
     const options = this.props.currencyOptions.map(option => (
-      <option key={option.currency} value={option.currency}>
+      <MenuItem key={option.currency} value={option.currency}>
         {option.currency}
-      </option>
+      </MenuItem>
     ));
     return (
-      <div>
-        <input
-          className="CurrencyInput_input"
-          type="number"
-          step=".01"
-          onChange={e => this.handleAmountChange(e.target.value)}
-          value={this.props.amount}
-        />
-        <select
-          onChange={e => this.handleCurrencyChange(e.target.value)}
+      <div className="CurrencyInput">
+        <Select
           value={this.props.currency.currency}
+          onChange={e => this.handleCurrencyChange(e.target.value)}
         >
           {options}
-        </select>
+        </Select>
+        <TextField
+          type="number"
+          value={this.props.amount}
+          onChange={e => this.handleAmountChange(e.target.value)}
+          margin="normal"
+        />
       </div>
     );
   }

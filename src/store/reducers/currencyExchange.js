@@ -30,6 +30,8 @@ export const initialState = {
   ],
 };
 
+const roundValue = value => Math.round(value * 100) / 100;
+
 const findMoney = (pocket, currency) => {
   const money = pocket.find(money => money.currency === currency.currency);
   return money ? money.amount : 0;
@@ -37,17 +39,24 @@ const findMoney = (pocket, currency) => {
 
 const updatePocket = state => {
   if (
-    state.inputCurrency === state.outputCurrency ||
-    state.availableInputAmount < state.inputAmount
+    state.inputCurrency.currency === state.outputCurrency.currency ||
+    state.availableInputAmount < state.inputAmount ||
+    !state.inputAmount
   ) {
     return state.pocket;
   }
   return state.pocket.map(money => {
-    if (money.currency === state.inputCurrency) {
-      return { ...money, amount: (money.amount -= state.inputAmount) };
+    if (money.currency === state.inputCurrency.currency) {
+      return {
+        ...money,
+        amount: roundValue((money.amount -= state.inputAmount)),
+      };
     }
-    if (money.currency === state.outputCurrency) {
-      return { ...money, amount: (money.amount += state.outputAmount) };
+    if (money.currency === state.outputCurrency.currency) {
+      return {
+        ...money,
+        amount: roundValue((money.amount += state.outputAmount)),
+      };
     }
     return money;
   });
@@ -69,8 +78,7 @@ export const currencyExchange = (state = initialState, action) => {
       return {
         ...state,
         inputAmount: action.amount,
-        outputAmount:
-          Math.round(action.amount * state.currencyRate * 100) / 100,
+        outputAmount: roundValue(action.amount * state.currencyRate),
       };
     case CHANGE_INPUT_CURRENCY:
       return {
@@ -81,8 +89,7 @@ export const currencyExchange = (state = initialState, action) => {
     case CHANGE_OUTPUT_AMOUNT:
       return {
         ...state,
-        inputAmount:
-          Math.round((action.amount / state.currencyRate) * 100) / 100,
+        inputAmount: roundValue(action.amount / state.currencyRate),
         outputAmount: action.amount,
       };
     case CHANGE_OUTPUT_CURRENCY:
@@ -100,7 +107,7 @@ export const currencyExchange = (state = initialState, action) => {
       return {
         ...state,
         loadingRates: false,
-        currencyRate: Math.round(action.rate * 100) / 100,
+        currencyRate: roundValue(action.rate),
       };
     case ERROR_CURRENCY_RATES:
       return {

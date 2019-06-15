@@ -2,6 +2,8 @@ import React from 'react';
 import { CurrencyInput } from '../CurrencyInput/CurrencyInput';
 import './Exchanger.css';
 import { Rate } from '../Rate/Rate';
+import { Balance } from '../Balance/Balance';
+import { ExchangeFab } from '../ExchangeFab/ExchangeFab';
 
 export class Exchanger extends React.Component {
   componentDidMount() {
@@ -23,8 +25,8 @@ export class Exchanger extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="Exchanger_field">
+      <div className="Exchanger">
+        <div className="Exchanger_top-section">
           <CurrencyInput
             className="Exchanger_input"
             amount={this.props.inputAmount}
@@ -35,23 +37,24 @@ export class Exchanger extends React.Component {
               changeCurrency: this.props.changeInputCurrency,
             }}
           />
-        </div>
 
-        <div className="Exchanger_field">
-          <span className="Exchanger_label">You have</span>
-          <span>{this.props.availableInputAmount}&nbsp;</span>
-          <span>{this.props.inputCurrency.symbol}</span>
+          <div className="Exchanger_field">
+            <span className="Exchanger_label">You have</span>
+            <Balance
+              amount={this.props.availableInputAmount}
+              currency={this.props.inputCurrency}
+            />
+          </div>
         </div>
+        <div className="Exchanger_bottom-section">
+          <div className="Exchanger_rate">
+            <Rate
+              rate={this.props.currencyRate}
+              inputCurrency={this.props.inputCurrency}
+              outputCurrency={this.props.outputCurrency}
+            />
+          </div>
 
-        <div className="Exchanger_rate">
-          <Rate
-            rate={this.props.currencyRate}
-            inputCurrency={this.props.inputCurrency}
-            outputCurrency={this.props.outputCurrency}
-          />
-        </div>
-
-        <div className="Exchanger_field">
           <CurrencyInput
             amount={this.props.outputAmount}
             currency={this.props.outputCurrency}
@@ -61,20 +64,27 @@ export class Exchanger extends React.Component {
               changeCurrency: this.props.changeOutputCurrency,
             }}
           />
-        </div>
 
-        <div className="Exchanger_field">
-          <span className="Exchanger_label">You have</span>
-          <span>{this.props.availableOutputAmount}&nbsp;</span>
-          <span>{this.props.outputCurrency.symbol}</span>
-        </div>
-        <div>
-          <button
-            onClick={this.props.exchange}
-            disabled={this.props.availableInputAmount < this.props.inputAmount}
-          >
-            Exchange
-          </button>
+          <div className="Exchanger_field">
+            <span className="Exchanger_label">You have</span>
+            <Balance
+              amount={this.props.availableOutputAmount}
+              currency={this.props.outputCurrency}
+            />
+          </div>
+          <div className="Exchanger_submit">
+            <ExchangeFab
+              variant="extended"
+              aria-label="Exchange"
+              onClick={this.props.exchange}
+              disabled={
+                this.props.availableInputAmount < this.props.inputAmount ||
+                !this.props.inputAmount
+              }
+            >
+              Exchange
+            </ExchangeFab>
+          </div>
         </div>
       </div>
     );

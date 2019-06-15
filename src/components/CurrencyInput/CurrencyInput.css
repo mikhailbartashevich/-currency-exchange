@@ -1,7 +1,14 @@
 .CurrencyInput {
-  display: block;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
 }
 
-.CurrencyInput_input {
-  margin-right: 10px;
+.CurrencyInput .MuiTextField-root {
+  min-width: 100px;
+  margin-left: 20px;
+}
+
+.CurrencyInput .MuiTextField-root .MuiInputBase-input {
+  text-align: right;
 }
