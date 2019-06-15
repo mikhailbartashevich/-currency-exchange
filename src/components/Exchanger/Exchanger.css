@@ -1,0 +1,13 @@
+.Exchanger_field {
+  margin: 10px;
+  text-align: start;
+}
+
+.Exchanger_label {
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.Exchanger_rate {
+  margin: 20px 10px;
+}

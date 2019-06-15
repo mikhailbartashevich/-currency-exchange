@@ -1,0 +1,7 @@
+.Rate {
+  display: flex;
+}
+
+.Rate_label {
+  margin-right: 5px;
+}
