@@ -27,4 +27,4 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-![alt text](https://raw.githubusercontent.com/mikhailbartashevich/currency-exchange/master/docs/screen.png)
+![alt text](https://raw.githubusercontent.com/mikhailbartashevich/currency-exchange/d2c08ccf8fa057bc55c3dc3e277249e8794f0060/docs/screen.png)
