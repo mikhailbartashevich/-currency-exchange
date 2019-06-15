@@ -1,36 +1,59 @@
-import { currencyExchange, initialState } from './currencyExchange';
+import { currencyExchange } from './currencyExchange';
 import {
   EXCHANGE,
   CHANGE_INPUT_CURRENCY,
   CHANGE_INPUT_AMOUNT,
   CHANGE_OUTPUT_CURRENCY,
   RECEIVE_CURRENCY_RATES,
+  UPDATE_ALL_CURRENCIES,
 } from '../actions/currencyExchangeActions';
 
 it('tests reducer', () => {
-  let newState = currencyExchange(initialState, { type: EXCHANGE });
+  const initialState = {
+    inputAmount: '',
+    inputCurrency: { currency: 'EUR', symbol: '€' },
+    outputAmount: '',
+    outputCurrency: { currency: 'USD', symbol: '$' },
+    currencyOptions: [
+      { currency: 'USD', symbol: '$' },
+      { currency: 'EUR', symbol: '€' },
+      { currency: 'GBP', symbol: '£' },
+    ],
+    currencyRate: 1.13,
+    loadingRates: false,
+    availableInputAmount: 100,
+    availableOutputAmount: 100,
+    pocket: [
+      { currency: 'USD', amount: 100 },
+      { currency: 'EUR', amount: 100 },
+      { currency: 'GBP', amount: 100 },
+    ],
+  };
+  const newState = currencyExchange(initialState, { type: EXCHANGE });
   expect(newState.availableInputAmount).toBe(100);
 
-  newState = currencyExchange(newState, {
+  const stateAfterExchange = currencyExchange(newState, {
     type: CHANGE_INPUT_CURRENCY,
     currency: { currency: 'EUR', symbol: '€' },
   });
-  expect(newState.inputCurrency.currency).toBe('EUR');
+  expect(stateAfterExchange.inputCurrency.currency).toBe('EUR');
 
-  newState = currencyExchange(newState, {
+  const stateAfterChangeInput = currencyExchange(stateAfterExchange, {
     type: CHANGE_INPUT_AMOUNT,
     amount: '100',
   });
-  expect(newState.inputAmount).toBe('100');
+  expect(stateAfterChangeInput.inputAmount).toBe('100');
 
-  newState = currencyExchange(newState, { type: EXCHANGE });
+  const stateAfterSecondExchange = currencyExchange(stateAfterChangeInput, {
+    type: EXCHANGE,
+  });
 
-  expect(newState.availableInputAmount).toBe(0);
-  expect(newState.availableOutputAmount).toBe(213);
+  expect(stateAfterSecondExchange.availableInputAmount).toBe(0);
+  expect(stateAfterSecondExchange.availableOutputAmount).toBe(213);
 });
 
 it('tests reducer - no EUR in pocket', () => {
-  let newState = {
+  const initialState = {
     inputAmount: 0,
     inputCurrency: { currency: 'EUR', symbol: '€' },
     outputAmount: 0,
@@ -51,23 +74,25 @@ it('tests reducer - no EUR in pocket', () => {
     ],
   };
 
-  newState = currencyExchange(newState, {
+  const stateAfterInputAmountChange = currencyExchange(initialState, {
     type: CHANGE_INPUT_AMOUNT,
     amount: '100',
   });
-  expect(newState.inputAmount).toBe('100');
+  expect(stateAfterInputAmountChange.inputAmount).toBe('100');
 
-  newState = currencyExchange(newState, { type: EXCHANGE });
-  expect(newState.availableInputAmount).toBe(0);
-  expect(newState.availableOutputAmount).toBe(213);
+  const stateAfterExchange = currencyExchange(stateAfterInputAmountChange, {
+    type: EXCHANGE,
+  });
+  expect(stateAfterExchange.availableInputAmount).toBe(0);
+  expect(stateAfterExchange.availableOutputAmount).toBe(213);
 
-  expect(newState.pocket[0].amount).toBe(213);
-  expect(newState.pocket[1].amount).toBe(0);
-  expect(newState.pocket[2].amount).toBe(100);
+  expect(stateAfterExchange.pocket[0].amount).toBe(213);
+  expect(stateAfterExchange.pocket[1].amount).toBe(0);
+  expect(stateAfterExchange.pocket[2].amount).toBe(100);
 });
 
 it('tests reducer - change rates and exchange', () => {
-  let newState = {
+  const initialState = {
     inputAmount: 0,
     inputCurrency: { currency: 'EUR', symbol: '€' },
     outputAmount: 0,
@@ -88,32 +113,64 @@ it('tests reducer - change rates and exchange', () => {
     ],
   };
 
-  newState = currencyExchange(newState, {
+  const newState = currencyExchange(initialState, {
     type: CHANGE_INPUT_AMOUNT,
     amount: '100',
   });
   expect(newState.inputAmount).toBe('100');
 
-  newState = currencyExchange(newState, {
+  const stateAfterChangeInputCurrency = currencyExchange(newState, {
     type: CHANGE_INPUT_CURRENCY,
     currency: { currency: 'USD', symbol: '$' },
   });
-  expect(newState.inputCurrency.currency).toBe('USD');
+  expect(stateAfterChangeInputCurrency.inputCurrency.currency).toBe('USD');
 
-  newState = currencyExchange(newState, {
+  const stateAfterChangeOutputCurrency = currencyExchange(stateAfterChangeInputCurrency, {
     type: CHANGE_OUTPUT_CURRENCY,
     currency: { currency: 'EUR', symbol: '€' },
   });
-  expect(newState.outputCurrency.currency).toBe('EUR');
+  expect(stateAfterChangeOutputCurrency.outputCurrency.currency).toBe('EUR');
 
-  newState = currencyExchange(newState, {
+  const stateAfterRatesChange = currencyExchange(stateAfterChangeOutputCurrency, {
     type: RECEIVE_CURRENCY_RATES,
     rate: 0.5111,
   });
-  expect(newState.currencyRate).toBe(0.51);
-  expect(newState.outputAmount).toBe(50);
+  expect(stateAfterRatesChange.currencyRate).toBe(0.51);
+  expect(stateAfterRatesChange.outputAmount).toBe(51.11);
 
-  newState = currencyExchange(newState, { type: EXCHANGE });
-  expect(newState.availableInputAmount).toBe(113);
+  const exchangeState = currencyExchange(stateAfterRatesChange, { type: EXCHANGE });
+  expect(exchangeState.availableInputAmount).toBe(113);
+  expect(exchangeState.availableOutputAmount).toBe(51.11);
+});
+
+it('tests reducer - should swap currencies and balances', () => {
+  const initialState = {
+    inputAmount: 0,
+    inputCurrency: { currency: 'EUR', symbol: '€' },
+    outputAmount: 0,
+    outputCurrency: { currency: 'USD', symbol: '$' },
+    currencyOptions: [
+      { currency: 'USD', symbol: '$' },
+      { currency: 'EUR', symbol: '€' },
+      { currency: 'GBP', symbol: '£' },
+    ],
+    currencyRate: 1.13,
+    loadingRates: false,
+    availableInputAmount: 50,
+    availableOutputAmount: 213,
+    pocket: [
+      { currency: 'USD', amount: 213 },
+      { currency: 'EUR', amount: 50 },
+      { currency: 'GBP', amount: 100 },
+    ],
+  };
+
+  const newState = currencyExchange(initialState, {
+    type: UPDATE_ALL_CURRENCIES,
+    inputCurrency: { currency: 'USD', symbol: '$' },
+    outputCurrency: { currency: 'EUR', symbol: '€' },
+  });
+
+  expect(newState.availableInputAmount).toBe(213);
   expect(newState.availableOutputAmount).toBe(50);
 });

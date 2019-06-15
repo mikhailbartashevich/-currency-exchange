@@ -104,6 +104,8 @@ export const currencyExchange = (state = initialState, action) => {
         ...state,
         outputCurrency: action.outputCurrency,
         inputCurrency: action.inputCurrency,
+        availableInputAmount: findMoney(state.pocket, action.inputCurrency),
+        availableOutputAmount: findMoney(state.pocket, action.outputCurrency),
       };
     case LOAD_CURRENCY_RATES:
       return {
