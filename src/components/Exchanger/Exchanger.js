@@ -23,7 +23,7 @@ export const ExchangerRaw = props => (
         }}
       />
 
-      <div className="Exchanger_field">
+      <div className="Exchanger_balance">
         <span className="Exchanger_label">You have</span>
         <Balance
           amount={props.availableInputAmount}
@@ -51,7 +51,7 @@ export const ExchangerRaw = props => (
         }}
       />
 
-      <div className="Exchanger_field">
+      <div className="Exchanger_balance">
         <span className="Exchanger_label">You have</span>
         <Balance
           amount={props.availableOutputAmount}

@@ -1,11 +1,11 @@
 .CurrencyInput {
   display: flex;
-  align-items: baseline;
   justify-content: space-between;
 }
 
 .CurrencyInput_select {
   min-width: 85px;
+  max-height: 55px;
 }
 
 .CurrencyInput .MuiTextField-root {

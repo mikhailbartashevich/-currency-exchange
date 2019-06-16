@@ -53,7 +53,6 @@ const CurrencyInputRaw = props => {
         }}
         value={props.amount}
         onChange={e => handleAmountChange(props)(e.target.value)}
-        margin="normal"
       />
     </div>
   );
