@@ -1,10 +1,9 @@
+## Travis Build
 [![Build Status](https://travis-ci.com/mikhailbartashevich/currency-exchange.svg?branch=prod)](https://travis-ci.com/mikhailbartashevich/currency-exchange)
 
 ## Live Version
 
 https://mikhailbartashevich.github.io/currency-exchange/
-
-### master branch contains build files, sources are stored in prod branch
 
 ## Available Scripts
 
