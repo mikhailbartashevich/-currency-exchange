@@ -4,16 +4,16 @@ import { pure } from 'recompose';
 import { Icon, IconButton } from '@material-ui/core';
 
 const styles = {
-  root: {
-    color: '#446dd2',
+  icon: {
+    color: '#6d8aff',
   },
 };
 
 const SwapIconButtonRaw = props => {
-  const { classes, color, ...other } = props;
+  const { classes, ...other } = props;
   return (
     <IconButton size="small" {...other} className="SwapIconButton">
-      <Icon className={classes.root}>
+      <Icon className={classes.icon}>
         swap_vert
       </Icon>
     </IconButton>
