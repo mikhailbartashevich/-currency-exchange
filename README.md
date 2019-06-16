@@ -18,4 +18,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ### `npm run build`
 ### `npm run deploy`
 
-![alt text](https://raw.githubusercontent.com/mikhailbartashevich/currency-exchange/d2c08ccf8fa057bc55c3dc3e277249e8794f0060/docs/screen.png)
+![alt text](https://github.com/mikhailbartashevich/currency-exchange/blob/master/docs/screen.png?raw=true)
