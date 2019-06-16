@@ -5,10 +5,8 @@ import PropTypes from 'prop-types';
 
 const RateRaw = props => (
   <div className="Rate">
-    <span>
-      1 {props.inputCurrency ? props.inputCurrency.symbol : ''} = {props.rate}{' '}
-      {props.outputCurrency ? props.outputCurrency.symbol : ''}
-    </span>
+    1 {props.inputCurrency ? props.inputCurrency.symbol : ''} = {props.rate}{' '}
+    {props.outputCurrency ? props.outputCurrency.symbol : ''}
   </div>
 );
 

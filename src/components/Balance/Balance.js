@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 
 export const BalanceRaw = props => (
   <span className="Balance">
-    <span>
-      {props.amount} {props.currency ? props.currency.symbol : ''}
-    </span>
+    {props.amount} {props.currency ? props.currency.symbol : ''}
   </span>
 );
 
