@@ -29,9 +29,10 @@ export const initialState = {
     { currency: 'EUR', amount: 100 },
     { currency: 'GBP', amount: 100 },
   ],
+  lastUpdatedAmount: 'input',
 };
 
-const roundValue = value => Math.round(value * 100) / 100;
+const roundValue = (value, round = 100) => Math.round(value * round) / round;
 
 const findMoney = (pocket, currency) => {
   const money = pocket.find(money => money.currency === currency.currency);
@@ -80,6 +81,7 @@ export const currencyExchange = (state = initialState, action) => {
         ...state,
         inputAmount: String(action.amount),
         outputAmount: String(roundValue(action.amount * state.currencyRate)),
+        lastUpdatedAmount: 'input',
       };
     case CHANGE_INPUT_CURRENCY:
       return {
@@ -92,6 +94,7 @@ export const currencyExchange = (state = initialState, action) => {
         ...state,
         inputAmount: String(roundValue(action.amount / state.currencyRate)),
         outputAmount: String(action.amount),
+        lastUpdatedAmount: 'output',
       };
     case CHANGE_OUTPUT_CURRENCY:
       return {
@@ -116,8 +119,15 @@ export const currencyExchange = (state = initialState, action) => {
       return {
         ...state,
         loadingRates: false,
-        currencyRate: roundValue(action.rate),
-        outputAmount: String(roundValue(state.inputAmount * action.rate)),
+        currencyRate: roundValue(action.rate, 10000),
+        outputAmount:
+          state.lastUpdatedAmount === 'input'
+            ? String(roundValue(state.inputAmount * action.rate))
+            : state.outputAmount,
+        inputAmount:
+          state.lastUpdatedAmount === 'output'
+            ? String(roundValue(state.outputAmount / action.rate))
+            : state.inputAmount,
       };
     case ERROR_CURRENCY_RATES:
       return {
