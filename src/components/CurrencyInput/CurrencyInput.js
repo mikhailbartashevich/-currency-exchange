@@ -1,6 +1,12 @@
 import React from 'react';
 import './CurrencyInput.css';
-import { Select, MenuItem, TextField } from '@material-ui/core';
+import {
+  Select,
+  MenuItem,
+  TextField,
+  OutlinedInput,
+  InputAdornment,
+} from '@material-ui/core';
 import { pure } from 'recompose';
 import PropTypes from 'prop-types';
 import { CurrencyPropType } from '../../model/currency.model';
@@ -28,6 +34,7 @@ const CurrencyInputRaw = props => {
   return (
     <div className="CurrencyInput">
       <Select
+        input={<OutlinedInput />}
         value={props.currency ? props.currency.currency : ''}
         onChange={e => handleCurrencyChange(props)(e.target.value)}
       >
@@ -35,6 +42,14 @@ const CurrencyInputRaw = props => {
       </Select>
       <TextField
         type="number"
+        variant="outlined"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              {props.currency.symbol}
+            </InputAdornment>
+          ),
+        }}
         value={props.amount}
         onChange={e => handleAmountChange(props)(e.target.value)}
         margin="normal"
