@@ -100,7 +100,6 @@ export const Exchanger = pure(
           this.props.inputCurrency,
           this.props.outputCurrency,
         );
-      clearInterval(this.fetchInterval);
       this.fetchInterval = setInterval(
         () =>
           this.props.fetchRates(
