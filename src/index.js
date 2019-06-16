@@ -9,8 +9,6 @@ import rootReducer from './store/reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
 
-console.log(process.env.NODE_ENV);
-
 let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
@@ -27,7 +25,4 @@ render(
   document.getElementById('root'),
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
