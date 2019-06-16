@@ -1,6 +1,7 @@
 import React from 'react';
 import Fab from '@material-ui/core/Fab';
 import { withStyles } from '@material-ui/styles';
+import { pure } from 'recompose';
 
 const styles = {
   root: {
@@ -24,4 +25,4 @@ const ExchangeFabRaw = props => {
   );
 };
 
-export const ExchangeFab = withStyles(styles)(ExchangeFabRaw);
+export const ExchangeFab = pure(withStyles(styles)(ExchangeFabRaw));

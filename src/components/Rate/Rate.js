@@ -1,13 +1,26 @@
 import React from 'react';
 import './Rate.css';
+import { pure } from 'recompose';
+import PropTypes from 'prop-types';
 
-export function Rate(props) {
-  return (
-    <div className="Rate">
-      <span>
-        1 {props.inputCurrency ? props.inputCurrency.symbol : ''} = {props.rate}{' '}
-        {props.outputCurrency ? props.outputCurrency.symbol : ''}
-      </span>
-    </div>
-  );
-}
+const RateRaw = props => (
+  <div className="Rate">
+    <span>
+      1 {props.inputCurrency ? props.inputCurrency.symbol : ''} = {props.rate}{' '}
+      {props.outputCurrency ? props.outputCurrency.symbol : ''}
+    </span>
+  </div>
+);
+
+RateRaw.propTypes = {
+  outputCurrency: PropTypes.shape({
+    currency: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+  inputCurrency: PropTypes.shape({
+    currency: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+};
+
+export const Rate = pure(RateRaw);

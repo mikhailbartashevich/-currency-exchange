@@ -27,7 +27,12 @@ export const updateInputCurrency = inputCurrency => {
   return (dispatch, getState) => {
     const outputCurrency = getState().currencyExchange.outputCurrency;
     if (inputCurrency.currency === outputCurrency.currency) {
-      dispatch(swapCurrencies(inputCurrency, getState().currencyExchange.inputCurrency));
+      dispatch(
+        swapCurrencies(
+          inputCurrency,
+          getState().currencyExchange.inputCurrency,
+        ),
+      );
     } else {
       dispatch(changeInputCurrency(inputCurrency));
       dispatch(fetchRates(inputCurrency, outputCurrency));
@@ -46,7 +51,12 @@ export const updateOutputCurrency = outputCurrency => {
   return (dispatch, getState) => {
     const inputCurrency = getState().currencyExchange.inputCurrency;
     if (inputCurrency.currency === outputCurrency.currency) {
-      dispatch(swapCurrencies(getState().currencyExchange.outputCurrency, outputCurrency));
+      dispatch(
+        swapCurrencies(
+          getState().currencyExchange.outputCurrency,
+          outputCurrency,
+        ),
+      );
     } else {
       dispatch(changeOutputCurrency(outputCurrency));
       dispatch(fetchRates(inputCurrency, outputCurrency));
@@ -96,7 +106,7 @@ const requestRates = (base, symbol) =>
 
 export const fetchRates = (base, symbol) => dispatch => {
   dispatch(loadRates());
-  requestRates(base, symbol)
+  return requestRates(base, symbol)
     .then(response => response.json(), error => dispatch(errorRates()))
     .then(json => dispatch(receiveRates(json.rates[symbol.currency])));
 };

@@ -7,7 +7,7 @@ exports[`Exchanger should render correctly in "debug" mode 1`] = `
   <div
     className="Exchanger_top-section"
   >
-    <CurrencyInput
+    <pure(CurrencyInputRaw)
       actions={
         Object {
           "changeAmount": undefined,
@@ -24,7 +24,7 @@ exports[`Exchanger should render correctly in "debug" mode 1`] = `
       >
         You have
       </span>
-      <Balance />
+      <pure(BalanceRaw) />
     </div>
   </div>
   <div
@@ -33,9 +33,9 @@ exports[`Exchanger should render correctly in "debug" mode 1`] = `
     <div
       className="Exchanger_rate"
     >
-      <Rate />
+      <pure(RateRaw) />
     </div>
-    <CurrencyInput
+    <pure(CurrencyInputRaw)
       actions={
         Object {
           "changeAmount": undefined,
@@ -51,18 +51,18 @@ exports[`Exchanger should render correctly in "debug" mode 1`] = `
       >
         You have
       </span>
-      <Balance />
+      <pure(BalanceRaw) />
     </div>
     <div
       className="Exchanger_submit"
     >
-      <WithStyles(ExchangeFabRaw)
+      <pure(WithStyles(ExchangeFabRaw))
         aria-label="Exchange"
         disabled={true}
         variant="extended"
       >
         Exchange
-      </WithStyles(ExchangeFabRaw)>
+      </pure(WithStyles(ExchangeFabRaw))>
     </div>
   </div>
 </div>
@@ -75,7 +75,7 @@ exports[`Exchanger should render correctly with no props 1`] = `
   <div
     className="Exchanger_top-section"
   >
-    <CurrencyInput
+    <pure(CurrencyInputRaw)
       actions={
         Object {
           "changeAmount": undefined,
@@ -92,7 +92,7 @@ exports[`Exchanger should render correctly with no props 1`] = `
       >
         You have
       </span>
-      <Balance />
+      <pure(BalanceRaw) />
     </div>
   </div>
   <div
@@ -101,9 +101,9 @@ exports[`Exchanger should render correctly with no props 1`] = `
     <div
       className="Exchanger_rate"
     >
-      <Rate />
+      <pure(RateRaw) />
     </div>
-    <CurrencyInput
+    <pure(CurrencyInputRaw)
       actions={
         Object {
           "changeAmount": undefined,
@@ -119,18 +119,18 @@ exports[`Exchanger should render correctly with no props 1`] = `
       >
         You have
       </span>
-      <Balance />
+      <pure(BalanceRaw) />
     </div>
     <div
       className="Exchanger_submit"
     >
-      <WithStyles(ExchangeFabRaw)
+      <pure(WithStyles(ExchangeFabRaw))
         aria-label="Exchange"
         disabled={true}
         variant="extended"
       >
         Exchange
-      </WithStyles(ExchangeFabRaw)>
+      </pure(WithStyles(ExchangeFabRaw))>
     </div>
   </div>
 </div>
@@ -143,7 +143,7 @@ exports[`Exchanger should render form with given props 1`] = `
   <div
     className="Exchanger_top-section"
   >
-    <CurrencyInput
+    <pure(CurrencyInputRaw)
       actions={
         Object {
           "changeAmount": undefined,
@@ -183,8 +183,8 @@ exports[`Exchanger should render form with given props 1`] = `
       >
         You have
       </span>
-      <Balance
-        amount="20"
+      <pure(BalanceRaw)
+        amount={20}
         currency={
           Object {
             "currency": "USD",
@@ -200,7 +200,7 @@ exports[`Exchanger should render form with given props 1`] = `
     <div
       className="Exchanger_rate"
     >
-      <Rate
+      <pure(RateRaw)
         inputCurrency={
           Object {
             "currency": "USD",
@@ -216,7 +216,7 @@ exports[`Exchanger should render form with given props 1`] = `
         rate="0.6"
       />
     </div>
-    <CurrencyInput
+    <pure(CurrencyInputRaw)
       actions={
         Object {
           "changeAmount": undefined,
@@ -255,8 +255,8 @@ exports[`Exchanger should render form with given props 1`] = `
       >
         You have
       </span>
-      <Balance
-        amount="30"
+      <pure(BalanceRaw)
+        amount={30}
         currency={
           Object {
             "currency": "EUR",
@@ -268,13 +268,13 @@ exports[`Exchanger should render form with given props 1`] = `
     <div
       className="Exchanger_submit"
     >
-      <WithStyles(ExchangeFabRaw)
+      <pure(WithStyles(ExchangeFabRaw))
         aria-label="Exchange"
         disabled={false}
         variant="extended"
       >
         Exchange
-      </WithStyles(ExchangeFabRaw)>
+      </pure(WithStyles(ExchangeFabRaw))>
     </div>
   </div>
 </div>
