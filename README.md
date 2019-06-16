@@ -4,8 +4,6 @@
 
 https://mikhailbartashevich.github.io/currency-exchange/
 
-### master branch contains build files, sources are stored in prod branch
-
 ## Available Scripts
 
 In the project directory, you can run:
