@@ -40,7 +40,10 @@
 }
 
 .Exchanger_submit {
+  margin: 0 auto;
   position: absolute;
   bottom: 20px;
-  width: 250px;
+  left: 0;
+  right: 0;
+  padding: 0 20px;
 }
