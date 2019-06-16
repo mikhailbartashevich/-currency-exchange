@@ -1,5 +1,3 @@
-import fetch from 'cross-fetch';
-
 export const UPDATE_ALL_CURRENCIES = 'UPDATE_ALL_CURRENCIES';
 export const updateAllCurrencies = (inputCurrency, outputCurrency) => {
   return {
@@ -11,8 +9,8 @@ export const updateAllCurrencies = (inputCurrency, outputCurrency) => {
 
 export const swapCurrencies = (inputCurrency, outputCurrency) => {
   return dispatch => {
-    dispatch(fetchRates(inputCurrency, outputCurrency));
     dispatch(updateAllCurrencies(inputCurrency, outputCurrency));
+    return dispatch(fetchRates(inputCurrency, outputCurrency));
   };
 };
 
@@ -27,7 +25,7 @@ export const updateInputCurrency = inputCurrency => {
   return (dispatch, getState) => {
     const outputCurrency = getState().currencyExchange.outputCurrency;
     if (inputCurrency.currency === outputCurrency.currency) {
-      dispatch(
+      return dispatch(
         swapCurrencies(
           inputCurrency,
           getState().currencyExchange.inputCurrency,
@@ -35,7 +33,7 @@ export const updateInputCurrency = inputCurrency => {
       );
     } else {
       dispatch(changeInputCurrency(inputCurrency));
-      dispatch(fetchRates(inputCurrency, outputCurrency));
+      return dispatch(fetchRates(inputCurrency, outputCurrency));
     }
   };
 };
@@ -51,7 +49,7 @@ export const updateOutputCurrency = outputCurrency => {
   return (dispatch, getState) => {
     const inputCurrency = getState().currencyExchange.inputCurrency;
     if (inputCurrency.currency === outputCurrency.currency) {
-      dispatch(
+      return dispatch(
         swapCurrencies(
           getState().currencyExchange.outputCurrency,
           outputCurrency,
@@ -59,7 +57,7 @@ export const updateOutputCurrency = outputCurrency => {
       );
     } else {
       dispatch(changeOutputCurrency(outputCurrency));
-      dispatch(fetchRates(inputCurrency, outputCurrency));
+      return dispatch(fetchRates(inputCurrency, outputCurrency));
     }
   };
 };

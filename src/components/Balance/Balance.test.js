@@ -16,7 +16,7 @@ describe('Balance', () => {
 
   it('should render balance with given props', () => {
     const inputCurrency = { currency: 'USD', symbol: '$' };
-    const component = shallow(<Balance amount="10" currency={inputCurrency} />);
+    const component = shallow(<Balance amount={10} currency={inputCurrency} />);
     expect(component).toMatchSnapshot();
   });
 });

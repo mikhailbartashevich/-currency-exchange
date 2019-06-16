@@ -12,7 +12,7 @@ export const BalanceRaw = props => (
 );
 
 BalanceRaw.propTypes = {
-  amount: PropTypes.string,
+  amount: PropTypes.number,
   currency: PropTypes.shape({
     currency: PropTypes.string,
     symbol: PropTypes.string,

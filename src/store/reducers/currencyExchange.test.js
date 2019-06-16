@@ -136,7 +136,7 @@ it('tests reducer - change rates and exchange', () => {
     rate: 0.5111,
   });
   expect(stateAfterRatesChange.currencyRate).toBe(0.51);
-  expect(stateAfterRatesChange.outputAmount).toBe(51.11);
+  expect(stateAfterRatesChange.outputAmount).toBe('51.11');
 
   const exchangeState = currencyExchange(stateAfterRatesChange, { type: EXCHANGE });
   expect(exchangeState.availableInputAmount).toBe(113);

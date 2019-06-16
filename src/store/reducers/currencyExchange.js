@@ -11,9 +11,9 @@ import {
 } from '../actions/currencyExchangeActions';
 
 export const initialState = {
-  inputAmount: '',
+  inputAmount: '0',
   inputCurrency: { currency: 'EUR', symbol: '€' },
-  outputAmount: '',
+  outputAmount: '0',
   outputCurrency: { currency: 'USD', symbol: '$' },
   currencyOptions: [
     { currency: 'USD', symbol: '$' },
@@ -69,8 +69,8 @@ export const currencyExchange = (state = initialState, action) => {
       const pocket = updatePocket(state);
       return {
         ...state,
-        inputAmount: 0,
-        outputAmount: 0,
+        inputAmount: '0',
+        outputAmount: '0',
         availableInputAmount: findMoney(pocket, state.inputCurrency),
         availableOutputAmount: findMoney(pocket, state.outputCurrency),
         pocket,
@@ -78,8 +78,8 @@ export const currencyExchange = (state = initialState, action) => {
     case CHANGE_INPUT_AMOUNT:
       return {
         ...state,
-        inputAmount: action.amount,
-        outputAmount: roundValue(action.amount * state.currencyRate),
+        inputAmount: String(action.amount),
+        outputAmount: String(roundValue(action.amount * state.currencyRate)),
       };
     case CHANGE_INPUT_CURRENCY:
       return {
@@ -90,8 +90,8 @@ export const currencyExchange = (state = initialState, action) => {
     case CHANGE_OUTPUT_AMOUNT:
       return {
         ...state,
-        inputAmount: roundValue(action.amount / state.currencyRate),
-        outputAmount: action.amount,
+        inputAmount: String(roundValue(action.amount / state.currencyRate)),
+        outputAmount: String(action.amount),
       };
     case CHANGE_OUTPUT_CURRENCY:
       return {
@@ -117,7 +117,7 @@ export const currencyExchange = (state = initialState, action) => {
         ...state,
         loadingRates: false,
         currencyRate: roundValue(action.rate),
-        outputAmount: roundValue(state.inputAmount * action.rate),
+        outputAmount: String(roundValue(state.inputAmount * action.rate)),
       };
     case ERROR_CURRENCY_RATES:
       return {

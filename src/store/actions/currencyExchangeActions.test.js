@@ -14,6 +14,9 @@ import {
   changeOutputAmount,
   changeInputAmount,
   CHANGE_INPUT_AMOUNT,
+  UPDATE_ALL_CURRENCIES,
+  updateOutputCurrency,
+  updateInputCurrency,
 } from './currencyExchangeActions';
 
 const middlewares = [thunk];
@@ -71,14 +74,14 @@ describe('async actions', () => {
     fetchMock.getOnce(
       'https://api.exchangeratesapi.io/latest?base=EUR&symbols=USD',
       {
-        body: { base: 'EUR', rates: { USD: 1.1265 }, date: '2019-06-14' },
+        body: { base: 'EUR', rates: { USD: 1.13 }, date: '2019-06-14' },
         headers: { 'content-type': 'application/json' },
       },
     );
 
     const expectedActions = [
       { type: LOAD_CURRENCY_RATES },
-      { type: RECEIVE_CURRENCY_RATES, rate: 1.1265 },
+      { type: RECEIVE_CURRENCY_RATES, rate: 1.13 },
     ];
     const store = mockStore({
       inputAmount: '',
@@ -108,6 +111,108 @@ describe('async actions', () => {
           { currency: 'USD', symbol: '$' },
         ),
       )
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+});
+
+describe('swap actions', () => {
+  afterEach(() => {
+    fetchMock.restore();
+  });
+
+  it('creates swap actions when change output currency has been done', () => {
+    fetchMock.getOnce(
+      'https://api.exchangeratesapi.io/latest?base=USD&symbols=EUR',
+      {
+        body: { base: 'USD', rates: { EUR: 0.89 }, date: '2019-06-14' },
+        headers: { 'content-type': 'application/json' },
+      },
+    );
+
+    const expectedActions = [
+      {
+        type: UPDATE_ALL_CURRENCIES,
+        outputCurrency: { currency: 'EUR', symbol: '€' },
+        inputCurrency: { currency: 'USD', symbol: '$' },
+      },
+      { type: LOAD_CURRENCY_RATES },
+      { type: RECEIVE_CURRENCY_RATES, rate: 0.89 },
+    ];
+    const store = mockStore({
+      currencyExchange: {
+        inputAmount: '',
+        inputCurrency: { currency: 'EUR', symbol: '€' },
+        outputAmount: '',
+        outputCurrency: { currency: 'USD', symbol: '$' },
+        currencyOptions: [
+          { currency: 'USD', symbol: '$' },
+          { currency: 'EUR', symbol: '€' },
+          { currency: 'GBP', symbol: '£' },
+        ],
+        currencyRate: 1.13,
+        loadingRates: false,
+        availableInputAmount: 100,
+        availableOutputAmount: 100,
+        pocket: [
+          { currency: 'USD', amount: 100 },
+          { currency: 'EUR', amount: 100 },
+          { currency: 'GBP', amount: 100 },
+        ],
+      },
+    });
+
+    return store
+      .dispatch(updateOutputCurrency({ currency: 'EUR', symbol: '€' }))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  it('creates swap actions when change input currency has been done', () => {
+    fetchMock.getOnce(
+      'https://api.exchangeratesapi.io/latest?base=USD&symbols=EUR',
+      {
+        body: { base: 'USD', rates: { EUR: 0.89 }, date: '2019-06-14' },
+        headers: { 'content-type': 'application/json' },
+      },
+    );
+
+    const expectedActions = [
+      {
+        type: UPDATE_ALL_CURRENCIES,
+        outputCurrency: { currency: 'EUR', symbol: '€' },
+        inputCurrency: { currency: 'USD', symbol: '$' },
+      },
+      { type: LOAD_CURRENCY_RATES },
+      { type: RECEIVE_CURRENCY_RATES, rate: 0.89 },
+    ];
+    const store = mockStore({
+      currencyExchange: {
+        inputAmount: '',
+        inputCurrency: { currency: 'EUR', symbol: '€' },
+        outputAmount: '',
+        outputCurrency: { currency: 'USD', symbol: '$' },
+        currencyOptions: [
+          { currency: 'USD', symbol: '$' },
+          { currency: 'EUR', symbol: '€' },
+          { currency: 'GBP', symbol: '£' },
+        ],
+        currencyRate: 1.13,
+        loadingRates: false,
+        availableInputAmount: 100,
+        availableOutputAmount: 100,
+        pocket: [
+          { currency: 'USD', amount: 100 },
+          { currency: 'EUR', amount: 100 },
+          { currency: 'GBP', amount: 100 },
+        ],
+      },
+    });
+
+    return store
+      .dispatch(updateInputCurrency({ currency: 'USD', symbol: '$' }))
       .then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
