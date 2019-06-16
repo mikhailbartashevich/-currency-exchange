@@ -6,6 +6,7 @@ import { Balance } from '../Balance/Balance';
 import { ExchangeFab } from '../ExchangeFab/ExchangeFab';
 import { lifecycle, pure } from 'recompose';
 import PropTypes from 'prop-types';
+import { CurrencyPropType } from '../../model/currency.model';
 
 export const ExchangerRaw = props => (
   <div className="Exchanger">
@@ -74,30 +75,19 @@ export const ExchangerRaw = props => (
 
 ExchangerRaw.propTypes = {
   inputAmount: PropTypes.string,
-  inputCurrency: PropTypes.shape({
-    currency: PropTypes.string,
-    symbol: PropTypes.string,
-  }),
+  inputCurrency: CurrencyPropType,
   availableInputAmount: PropTypes.number,
   changeInputAmount: PropTypes.func,
   changeInputCurrency: PropTypes.func,
 
   outputAmount: PropTypes.string,
-  outputCurrency: PropTypes.shape({
-    currency: PropTypes.string,
-    symbol: PropTypes.string,
-  }),
+  outputCurrency: CurrencyPropType,
   availableOutputAmount: PropTypes.number,
   changeOutputAmount: PropTypes.func,
   changeOutputCurrency: PropTypes.func,
 
   exchange: PropTypes.func,
-  currencyOptions: PropTypes.arrayOf(
-    PropTypes.shape({
-      currency: PropTypes.string,
-      symbol: PropTypes.string,
-    }),
-  ),
+  currencyOptions: PropTypes.arrayOf(CurrencyPropType),
 };
 
 export const Exchanger = pure(

@@ -2,6 +2,7 @@ import React from 'react';
 import './Balance.css';
 import { pure } from 'recompose';
 import PropTypes from 'prop-types';
+import { CurrencyPropType } from '../../model/currency.model';
 
 export const BalanceRaw = props => (
   <span className="Balance">
@@ -11,10 +12,7 @@ export const BalanceRaw = props => (
 
 BalanceRaw.propTypes = {
   amount: PropTypes.number,
-  currency: PropTypes.shape({
-    currency: PropTypes.string,
-    symbol: PropTypes.string,
-  }),
+  currency: CurrencyPropType,
 };
 
 export const Balance = pure(BalanceRaw);

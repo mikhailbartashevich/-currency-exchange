@@ -3,15 +3,15 @@ import './CurrencyInput.css';
 import { Select, MenuItem, TextField } from '@material-ui/core';
 import { pure } from 'recompose';
 import PropTypes from 'prop-types';
+import { CurrencyPropType } from '../../model/currency.model';
 
 const truncate = value => {
   const match = value.toString().match(/^\d+(?:\.\d{0,2})?/);
   return match ? match[0] : '';
 };
 
-const handleAmountChange = props => amount => {
+const handleAmountChange = props => amount =>
   props.actions.changeAmount(truncate(amount));
-};
 
 const handleCurrencyChange = props => currency =>
   props.actions.changeCurrency(
@@ -49,16 +49,8 @@ CurrencyInputRaw.propTypes = {
     changeCurrency: PropTypes.func,
   }),
   amount: PropTypes.string,
-  currencyOptions: PropTypes.arrayOf(
-    PropTypes.shape({
-      currency: PropTypes.string,
-      symbol: PropTypes.string,
-    }),
-  ),
-  currency: PropTypes.shape({
-    currency: PropTypes.string,
-    symbol: PropTypes.string,
-  }),
+  currencyOptions: PropTypes.arrayOf(CurrencyPropType),
+  currency: CurrencyPropType,
 };
 
 export const CurrencyInput = pure(CurrencyInputRaw);

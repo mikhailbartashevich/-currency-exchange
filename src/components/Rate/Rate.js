@@ -1,7 +1,7 @@
 import React from 'react';
 import './Rate.css';
 import { pure } from 'recompose';
-import PropTypes from 'prop-types';
+import { CurrencyPropType } from '../../model/currency.model';
 
 const RateRaw = props => (
   <div className="Rate">
@@ -11,14 +11,8 @@ const RateRaw = props => (
 );
 
 RateRaw.propTypes = {
-  outputCurrency: PropTypes.shape({
-    currency: PropTypes.string,
-    symbol: PropTypes.string,
-  }),
-  inputCurrency: PropTypes.shape({
-    currency: PropTypes.string,
-    symbol: PropTypes.string,
-  }),
+  outputCurrency: CurrencyPropType,
+  inputCurrency: CurrencyPropType,
 };
 
 export const Rate = pure(RateRaw);
