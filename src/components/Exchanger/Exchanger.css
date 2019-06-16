@@ -35,6 +35,10 @@
   position: relative;
 }
 
+.Exchanger_bottom-section .SwapIconButton {
+  margin-top: -50px;
+}
+
 .Exchanger_submit {
   position: absolute;
   bottom: 20px;

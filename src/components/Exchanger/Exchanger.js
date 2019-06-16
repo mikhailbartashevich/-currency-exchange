@@ -7,6 +7,7 @@ import { ExchangeFab } from '../ExchangeFab/ExchangeFab';
 import { lifecycle, pure } from 'recompose';
 import PropTypes from 'prop-types';
 import { CurrencyPropType } from '../../model/currency.model';
+import { SwapIconButton } from '../SwapIconButton/SwapIconButton';
 
 export const ExchangerRaw = props => (
   <div className="Exchanger">
@@ -38,6 +39,7 @@ export const ExchangerRaw = props => (
           outputCurrency={props.outputCurrency}
         />
       </div>
+      <SwapIconButton onClick={props.swapCurrencies} />
 
       <CurrencyInput
         amount={props.outputAmount}

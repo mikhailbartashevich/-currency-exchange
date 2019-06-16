@@ -8,9 +8,11 @@ export const updateAllCurrencies = (inputCurrency, outputCurrency) => {
 };
 
 export const swapCurrencies = (inputCurrency, outputCurrency) => {
-  return dispatch => {
-    dispatch(updateAllCurrencies(inputCurrency, outputCurrency));
-    return dispatch(fetchRates(inputCurrency, outputCurrency));
+  return (dispatch, getState) => {
+    const newInputCurrency = inputCurrency || getState().currencyExchange.outputCurrency;
+    const newOutputCurrency = outputCurrency || getState().currencyExchange.inputCurrency;
+    dispatch(updateAllCurrencies(newInputCurrency, newOutputCurrency));
+    return dispatch(fetchRates(newInputCurrency, newOutputCurrency));
   };
 };
 

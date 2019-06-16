@@ -17,6 +17,7 @@ import {
   UPDATE_ALL_CURRENCIES,
   updateOutputCurrency,
   updateInputCurrency,
+  swapCurrencies,
 } from './currencyExchangeActions';
 
 const middlewares = [thunk];
@@ -213,6 +214,54 @@ describe('swap actions', () => {
 
     return store
       .dispatch(updateInputCurrency({ currency: 'USD', symbol: '$' }))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  it('creates swap actions when change input currency has been done', () => {
+    fetchMock.getOnce(
+      'https://api.exchangeratesapi.io/latest?base=USD&symbols=EUR',
+      {
+        body: { base: 'USD', rates: { EUR: 0.89 }, date: '2019-06-14' },
+        headers: { 'content-type': 'application/json' },
+      },
+    );
+
+    const expectedActions = [
+      {
+        type: UPDATE_ALL_CURRENCIES,
+        outputCurrency: { currency: 'EUR', symbol: '€' },
+        inputCurrency: { currency: 'USD', symbol: '$' },
+      },
+      { type: LOAD_CURRENCY_RATES },
+      { type: RECEIVE_CURRENCY_RATES, rate: 0.89 },
+    ];
+    const store = mockStore({
+      currencyExchange: {
+        inputAmount: '',
+        inputCurrency: { currency: 'EUR', symbol: '€' },
+        outputAmount: '',
+        outputCurrency: { currency: 'USD', symbol: '$' },
+        currencyOptions: [
+          { currency: 'USD', symbol: '$' },
+          { currency: 'EUR', symbol: '€' },
+          { currency: 'GBP', symbol: '£' },
+        ],
+        currencyRate: 1.13,
+        loadingRates: false,
+        availableInputAmount: 100,
+        availableOutputAmount: 100,
+        pocket: [
+          { currency: 'USD', amount: 100 },
+          { currency: 'EUR', amount: 100 },
+          { currency: 'GBP', amount: 100 },
+        ],
+      },
+    });
+
+    return store
+      .dispatch(swapCurrencies())
       .then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });

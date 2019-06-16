@@ -58,4 +58,24 @@ describe('Exchanger', () => {
     component.find('pure(WithStyles(ExchangeFabRaw))').simulate('click');
     expect(clickFn).toHaveBeenCalled();
   });
+
+  it('button click should send swap event', () => {
+    const clickFn = jest.fn();
+    const inputCurrency = { currency: 'USD', symbol: '$' };
+    const outputCurrency = { currency: 'EUR', symbol: '€' };
+    const component = shallow(
+      <ExchangerRaw
+        inputAmount="10"
+        inputCurrency={inputCurrency}
+        outputAmount="10"
+        outputCurrency={outputCurrency}
+        currencyRate="0.6"
+        availableInputAmount={20}
+        availableOutputAmount={30}
+        swapCurrencies={clickFn}
+      />,
+    );
+    component.find('pure(WithStyles(SwapIconButtonRaw))').simulate('click');
+    expect(clickFn).toHaveBeenCalled();
+  });
 });

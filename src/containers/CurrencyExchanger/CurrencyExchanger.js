@@ -7,6 +7,7 @@ import {
   updateOutputCurrency,
   exchange,
   fetchRates,
+  swapCurrencies,
 } from '../../store/actions/currencyExchangeActions';
 
 const mapStateToProps = state => {
@@ -40,6 +41,7 @@ const mapDispatchToProps = dispatch => ({
   exchange: _ => dispatch(exchange()),
   fetchRates: (inputCurrency, outputCurrency) =>
     dispatch(fetchRates(inputCurrency, outputCurrency)),
+  swapCurrencies: _ => dispatch(swapCurrencies()),
 });
 
 export const CurrencyExchanger = connect(
