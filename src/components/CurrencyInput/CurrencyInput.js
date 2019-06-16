@@ -35,6 +35,7 @@ const CurrencyInputRaw = props => {
     <div className="CurrencyInput">
       <Select
         input={<OutlinedInput />}
+        className="CurrencyInput_select"
         value={props.currency ? props.currency.currency : ''}
         onChange={e => handleCurrencyChange(props)(e.target.value)}
       >

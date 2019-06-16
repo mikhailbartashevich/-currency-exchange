@@ -4,6 +4,10 @@
   justify-content: space-between;
 }
 
+.CurrencyInput_select {
+  min-width: 85px;
+}
+
 .CurrencyInput .MuiTextField-root {
   min-width: 100px;
   margin-left: 20px;
