@@ -17,7 +17,7 @@ exports[`Exchanger should render correctly in "debug" mode 1`] = `
       className="Exchanger_input"
     />
     <div
-      className="Exchanger_field"
+      className="Exchanger_balance"
     >
       <span
         className="Exchanger_label"
@@ -45,7 +45,7 @@ exports[`Exchanger should render correctly in "debug" mode 1`] = `
       }
     />
     <div
-      className="Exchanger_field"
+      className="Exchanger_balance"
     >
       <span
         className="Exchanger_label"
@@ -86,7 +86,7 @@ exports[`Exchanger should render correctly with no props 1`] = `
       className="Exchanger_input"
     />
     <div
-      className="Exchanger_field"
+      className="Exchanger_balance"
     >
       <span
         className="Exchanger_label"
@@ -114,7 +114,7 @@ exports[`Exchanger should render correctly with no props 1`] = `
       }
     />
     <div
-      className="Exchanger_field"
+      className="Exchanger_balance"
     >
       <span
         className="Exchanger_label"
@@ -178,7 +178,7 @@ exports[`Exchanger should render form with given props 1`] = `
       }
     />
     <div
-      className="Exchanger_field"
+      className="Exchanger_balance"
     >
       <span
         className="Exchanger_label"
@@ -251,7 +251,7 @@ exports[`Exchanger should render form with given props 1`] = `
       }
     />
     <div
-      className="Exchanger_field"
+      className="Exchanger_balance"
     >
       <span
         className="Exchanger_label"
